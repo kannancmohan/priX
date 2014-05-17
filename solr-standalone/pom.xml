@@ -1,0 +1,265 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.in.prix.solr</groupId>
+	<artifactId>solr-standalone</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>[${project.groupId}:${project.artifactId}:${project.version}]</name>
+
+	<properties>
+		<slf4j.version>1.7.5</slf4j.version>
+		<solr.version>4.8.0</solr.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>dev</build.profile.id>
+			</properties>
+		</profile>
+	</profiles>
+	<dependencies>
+		<!-- Add dependencies here -->
+		<!-- SLF4J -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<!-- Log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<!-- Apache Solr Search Server -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr</artifactId>
+			<version>${solr.version}</version>
+			<type>war</type>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>solr-standalone</finalName>
+		<!-- Add filter configuration here -->
+		<!-- filter that reads the profile specific configuration file and replaces 
+			the variables found from our resources with the actual property values. -->
+		<filters>
+			<filter>${project.basedir}/profiles/${build.profile.id}/config.properties</filter>
+		</filters>
+		<!-- Add resources configuration here -->
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+			<!-- This plugin config was added to avoid eclipse from automatically executing the copy-resource job when refreshing project in eclipse-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-resources-plugin</artifactId>
+										<versionRange>[0.0,)</versionRange>
+										<goals>
+											<goal>copy-resources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnIncremental>false</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- Add plugin configuration here -->
+			<!-- Because we want that all property values used in our POM file are 
+				read from an external properties file, we have to use a plugin called the 
+				Properties Maven plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<configuration>
+					<files>
+						<!-- Properties are read from profile specific property file -->
+						<file>${project.basedir}/profiles/${build.profile.id}/config.properties</file>
+					</files>
+				</configuration>
+				<executions>
+					<!-- Load properties for the default lifecycle -->
+					<execution>
+						<id>default-lifecycle-properties</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+					</execution>
+					<!-- Load properties for the clean lifecycle -->
+					<execution>
+						<id>clean-lifecycle-properties</id>
+						<phase>pre-clean</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-solr-config-xml</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${solr.solr.home}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/resources</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>solr.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-solr-config</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${solr.solr.home}/${solr.default.core.directory}/conf</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/config</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-solr-collection-properties</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${solr.solr.home}/${solr.default.core.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/resources</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>core.properties</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>clean-solr</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${solr.solr.home}/${solr.default.core.directory}</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</execution>
+					<execution>
+						<id>clean-solr-xml</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${solr.solr.home}</directory>
+									<includes>
+										<include>solr.xml</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.15.v20140411</version>
+				<configuration>
+					<stopPort>9966</stopPort>
+					<stopKey>stop</stopKey>
+					<connectors>
+						<!-- Listen to port 8983 -->
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8983</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+					<!-- Read system properties from profile specific configuration file -->
+					<systemPropertiesFile>${project.basedir}/profiles/${build.profile.id}/config.properties</systemPropertiesFile>
+					<webApp>
+						<contextPath>/solr</contextPath>
+					</webApp>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
