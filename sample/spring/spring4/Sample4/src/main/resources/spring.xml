@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Simple Constructor-based dependency injection by given direct value -->
+	<bean id="student1" class="org.in.prix.sample.spring4.sample4.StudentImpl">
+		<constructor-arg value="Ben de" />
+	</bean>
+
+	<!-- Constructor-based dependency injection using type to avoid ambiguities -->
+	<bean id="student2" class="org.in.prix.sample.spring4.sample4.StudentImpl">
+		<constructor-arg value="Ben de" />
+		<constructor-arg value="10" type="int" />
+	</bean>
+
+	<!-- Constructor-based dependency injection using index to avoid ambiguities -->
+	<bean id="student3" class="org.in.prix.sample.spring4.sample4.StudentImpl">
+		<constructor-arg value="male" type="java.lang.String"
+			index="1" />
+		<constructor-arg value="Ben de" index="0" />
+	</bean>
+
+	<!-- Constructor-based dependency injection by referring to other beans -->
+	<bean id="student4" class="org.in.prix.sample.spring4.sample4.StudentImpl">
+		<constructor-arg ref="address" />
+	</bean>
+
+	<!-- Constructor-based dependency injection by referring to other bean using 
+		ref.This is same as <constructor-arg ref="address" /> -->
+	<bean id="student5" class="org.in.prix.sample.spring4.sample4.StudentImpl">
+		<constructor-arg>
+			<ref bean="address" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="address" class="org.in.prix.sample.spring4.sample4.Address">
+		<constructor-arg value="Sample address 1" />
+		<constructor-arg value="Sample address 2" />
+		<constructor-arg value="Sample street" />
+	</bean>
+
+</beans>
