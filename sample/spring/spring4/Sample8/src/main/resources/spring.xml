@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="studentLocater" class="org.in.prix.sample.spring4.sample8.StudentImpl" />
+
+	<!-- example for Instantiation with instance factory method -->
+	<bean id="student" factory-method="createInstance" factory-bean="studentLocater">
+		<constructor-arg value="Jhones" />
+		<constructor-arg value="11" />
+		<constructor-arg value="male" />
+	</bean>
+
+</beans>
