@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="classA" class="org.in.prix.sample.spring4.sample10.ClassA"
+		depends-on="classB" />
+	<bean id="classB" class="org.in.prix.sample.spring4.sample10.ClassB"
+		depends-on="classC" />
+	<!-- even though its set as lazy-init=true, this will be initialized to 
+		satisfy classB's depends-on -->
+	<bean id="classC" class="org.in.prix.sample.spring4.sample10.ClassC"
+		lazy-init="true" />
+	<bean id="classD" class="org.in.prix.sample.spring4.sample10.ClassD" lazy-init="true"/>
+
+</beans>
