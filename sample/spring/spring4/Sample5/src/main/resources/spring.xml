@@ -22,9 +22,9 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	</bean>
 
 	<bean id="address" class="org.in.prix.sample.spring4.sample5.Address">
-		<constructor-arg value="Example address 1" />
-		<constructor-arg value="Example address 2" />
-		<constructor-arg value="Example street" />
+		<property name="address1" value="Example address 1" />
+		<property name="address2" value="Example address 2" />
+		<property name="street" value="Example street" />
 	</bean>
 
 </beans>
