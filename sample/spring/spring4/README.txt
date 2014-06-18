@@ -6,3 +6,4 @@ Sample 5: Setter based dependecy
 Sample 6: Aliases sample
 Sample 7: Example for Instantiation with a static factory method
 Sample 8: Example for Instantiation with instance factory method
+Sample 9: Example using depends-on
