@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- example for Instantiation with a static factory method -->
+	<bean id="student" class="org.in.prix.sample.spring4.sample7.StudentImpl"
+		factory-method="createInstance">
+		<constructor-arg value="Thomas" />
+		<constructor-arg value="11" />
+		<constructor-arg value="male" />
+	</bean>
+
+</beans>
