@@ -7,3 +7,5 @@ Sample 6: Aliases sample
 Sample 7: Example for Instantiation with a static factory method
 Sample 8: Example for Instantiation with instance factory method
 Sample 9: Example using depends-on
+Sample 10: Example using lazy-init
+Sample 11: Example init-method and destroy-methods
