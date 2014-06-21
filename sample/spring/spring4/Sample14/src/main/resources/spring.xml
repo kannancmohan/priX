@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="init" default-destroy-method="destroy">
+
+	<!-- bean with scope singleton -->
+	<bean id="dateService" class="org.in.prix.sample.spring4.sample14.DateServiceBean">
+		<property name="defaultTime" ref="defaultTime" />
+		<replaced-method name="getCurrentDateTime" replacer="currentTimeReplacer">
+			<arg-type>String</arg-type>
+		</replaced-method>
+	</bean>
+
+	<bean id="defaultTime" class="org.in.prix.sample.spring4.sample14.CurrentDateTime">
+		<constructor-arg value="dd/M/yyyy" />
+	</bean>
+
+	<bean id="currentTimeReplacer"
+		class="org.in.prix.sample.spring4.sample14.MethodReplacerImpl" />
+
+</beans>
