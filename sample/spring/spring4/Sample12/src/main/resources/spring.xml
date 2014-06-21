@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="init" default-destroy-method="destroy">
+
+	<!-- bean with scope singleton -->
+	<bean id="country" class="org.in.prix.sample.spring4.sample12.Country" />
+
+	<!-- For prototype beans,destroy method wont be called -->
+	<bean id="india" class="org.in.prix.sample.spring4.sample12.Capital"
+		scope="prototype">
+		<property name="capitalName" value="Delhi" />
+	</bean>
+
+	<bean id="spain" class="org.in.prix.sample.spring4.sample12.Capital"
+		scope="prototype">
+		<property name="capitalName" value="Madrid" />
+	</bean>
+
+</beans>
