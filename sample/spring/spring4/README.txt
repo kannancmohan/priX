@@ -12,3 +12,6 @@ Sample 11: Example init-method and destroy-methods
 // Method injection :following samples shows the 3 ways to instantiate prototype bean at runtime in a singleton
 Sample 12: Example demonstrating the use of ApplicationContextAware for Method injection
 Sample 13: Example demonstrating the use lookup-method for Method injection
+Sample 14: Example demonstrating the use method replacement for Method injection
+//
+Sample 15: Example demonstrating how to log in Spring with SLF4J and Logback
