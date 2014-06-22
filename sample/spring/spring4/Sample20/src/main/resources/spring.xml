@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="constructor" default-autowire-candidates="*Address">
+
+	<bean id="customer" class="org.in.prix.sample.spring4.sample20.Customer" />
+	<bean id="billingAddress" class="org.in.prix.sample.spring4.sample20.BillingAddress">
+		<property name="address1" value="Default Billing Address" />
+		<property name="address2" value="Default Billing Address 2" />
+	</bean>
+	<!-- Remove the autowire-candidate="true" and see what happens.Should throw UnsatisfiedDependencyException -->
+	<bean id="shippingAddress" class="org.in.prix.sample.spring4.sample20.ShippingAddress"
+		autowire-candidate="false">
+		<property name="address1" value="Default Shipping Address" />
+		<property name="address2" value="Default Shipping Address 2" />
+	</bean>
+
+
+</beans>
