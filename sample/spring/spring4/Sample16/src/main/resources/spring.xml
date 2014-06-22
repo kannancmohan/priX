@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="init" default-destroy-method="destroy">
+
+	<bean id="abstractpizzaStoreWithoutClass" abstract="true">
+		<property name="name" value="pizza hut" />
+		<property name="address" value="Default Address" />
+		<property name="location" value="Default Location" />
+	</bean>
+	<bean id="pizzaStore" class="org.in.prix.sample.spring4.sample16.PizzaStore" parent="abstractpizzaStoreWithoutClass">
+		<property name="location" value="Some Other Location" />
+	</bean>
+
+</beans>

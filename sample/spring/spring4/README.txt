@@ -15,3 +15,4 @@ Sample 13: Example demonstrating the use lookup-method for Method injection
 Sample 14: Example demonstrating the use method replacement for Method injection
 //
 Sample 15: Example demonstrating how to log in Spring with SLF4J and Logback
+Sample 16: Example demonstrating Bean definition inheritance using parent
