@@ -20,3 +20,5 @@ Sample 17: Example for autowiring by name
 Sample 18: Example for autowiring by type
 Sample 19: Example for autowiring constructor
 Sample 20: Example for autowire-candidate set as false
+//Customizing the nature of bean
+Sample 21: Example for Startup and shutdown callbacks using SmartLifeCycle interface
