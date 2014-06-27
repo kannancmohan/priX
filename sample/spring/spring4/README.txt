@@ -21,4 +21,7 @@ Sample 18: Example for autowiring by type
 Sample 19: Example for autowiring constructor
 Sample 20: Example for autowire-candidate set as false
 //Customizing the nature of bean
-Sample 21: Example for Startup and shutdown callbacks using SmartLifeCycle interface
+Sample 21: Example for Startup and shutdown callbacks using SmartLifeCycle interface(call backs when applicationcontext starts/stops)
+// initialization and destruction callback :following samples shows the 3 ways to initialization and destruction callback
+Sample 22: Example for initialization and destruction callbacks Using InitializingBean and DisposableBean(not recommended as it is strong coupling to spring)
+
