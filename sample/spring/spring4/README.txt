@@ -31,3 +31,5 @@ Sample 24: Example showing the use of few Aware callbacks
 
 //Container Extension Points
 Sample 25: Example for BeanPostProcessor
+Sample 26: Example for BeanFactoryPostProcessors
+
