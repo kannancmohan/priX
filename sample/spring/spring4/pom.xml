@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.in.prix.sample.spring4</groupId>
+	<artifactId>Samples</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+        <module>Sample1</module>
+        <module>Sample2</module>
+        <module>Sample3</module>
+        <module>Sample4</module>
+        <module>Sample5</module>
+        <module>Sample6</module>
+        <module>Sample7</module>
+        <module>Sample8</module>
+        <module>Sample9</module>
+        <module>Sample10</module>
+        <module>Sample11</module>
+        <module>Sample12</module>
+        <module>Sample13</module>
+        <module>Sample14</module>
+        <module>Sample15</module>
+        <module>Sample16</module>
+        <module>Sample17</module>
+        <module>Sample18</module>
+        <module>Sample19</module>
+        <module>Sample20</module>
+        <module>Sample21</module>
+        <module>Sample22</module>
+        <module>Sample23</module>
+        <module>Sample24</module>
+        <module>Sample25</module>
+        <module>Sample26</module>
+    </modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>4.0.5.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
